@@ -18,7 +18,10 @@ board = np.array(
 
 def ucb_score(parent, child): # upper confidence bound
 	prior_score = child.prior * math.sqrt(parent.visits) / (child.visits + 1)
-	value_score = child.value / child.visits
+	if child.visits > 0:
+		value_score = child.value / child.visits
+	else:
+		value_score = 0
 	return value_score + prior_score
 	# this helps to find the balance the exploration-exploitation trade off
 
